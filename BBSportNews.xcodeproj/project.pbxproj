@@ -15,7 +15,7 @@
 		4F0E3D681F9F35E80031DF11 /* WeakObjectSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0E3D661F9F35AF0031DF11 /* WeakObjectSet.swift */; };
 		4F0E3D6B1F9F36150031DF11 /* NotificationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0E3D6A1F9F36150031DF11 /* NotificationProtocol.swift */; };
 		4F0E3D6D1F9F3BAD0031DF11 /* Manager4LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0E3D6C1F9F3BAD0031DF11 /* Manager4LocalStorage.swift */; };
-		4F0E3D6F1F9F4DC40031DF11 /* Manager4CacheArticleImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleImages.swift */; };
+		4F0E3D6F1F9F4DC40031DF11 /* Manager4CacheArticleHtmlContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleHtmlContent.swift */; };
 		4F1D916B1F9F34E500B06083 /* NetReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F1D91681F9F324100B06083 /* NetReachability.swift */; };
 		4F27B1721F9E0AE200301EC7 /* Manager4Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */; };
 		4F27B1751F9E10D400301EC7 /* ArticleInfoTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27B1741F9E10D400301EC7 /* ArticleInfoTVCell.swift */; };
@@ -56,7 +56,7 @@
 		4F0E3D661F9F35AF0031DF11 /* WeakObjectSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeakObjectSet.swift; sourceTree = "<group>"; };
 		4F0E3D6A1F9F36150031DF11 /* NotificationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationProtocol.swift; sourceTree = "<group>"; };
 		4F0E3D6C1F9F3BAD0031DF11 /* Manager4LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4LocalStorage.swift; sourceTree = "<group>"; };
-		4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4CacheArticleImages.swift; sourceTree = "<group>"; };
+		4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleHtmlContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4CacheArticleHtmlContent.swift; sourceTree = "<group>"; };
 		4F1D91681F9F324100B06083 /* NetReachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReachability.swift; sourceTree = "<group>"; };
 		4F1D91691F9F349000B06083 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4Network.swift; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 			children = (
 				4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */,
 				4F026FD91F9ECB78006DEABF /* Manager4CacheArticle.swift */,
+				4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleHtmlContent.swift */,
 				4F0E3D6C1F9F3BAD0031DF11 /* Manager4LocalStorage.swift */,
-				4F0E3D6E1F9F4DC40031DF11 /* Manager4CacheArticleImages.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -376,7 +376,7 @@
 				4F543F031F9E013E0075F384 /* ArticleDetailVC.swift in Sources */,
 				4F0E3D6D1F9F3BAD0031DF11 /* Manager4LocalStorage.swift in Sources */,
 				4F026FE11F9ECF26006DEABF /* PendingOperations.swift in Sources */,
-				4F0E3D6F1F9F4DC40031DF11 /* Manager4CacheArticleImages.swift in Sources */,
+				4F0E3D6F1F9F4DC40031DF11 /* Manager4CacheArticleHtmlContent.swift in Sources */,
 				4F27B1721F9E0AE200301EC7 /* Manager4Network.swift in Sources */,
 				4F0E3D6B1F9F36150031DF11 /* NotificationProtocol.swift in Sources */,
 				4F026FDA1F9ECB78006DEABF /* Manager4CacheArticle.swift in Sources */,

@@ -39,9 +39,9 @@ class SportNewsTableVC: UITableViewController {
         
         // add fake webview to cache the data
         if #available(iOS 8, *) {
-            view.addSubview(Manager4CacheArticleImages.shared.wkWebView)
+            view.addSubview(Manager4CacheArticleHtmlContent.shared.wkWebView)
         } else {
-            view.addSubview(Manager4CacheArticleImages.shared.uiWebView)
+            view.addSubview(Manager4CacheArticleHtmlContent.shared.uiWebView)
         }
         
         // trick to hide separator of empty cell

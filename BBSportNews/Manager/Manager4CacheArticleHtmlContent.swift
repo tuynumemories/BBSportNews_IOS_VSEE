@@ -9,8 +9,8 @@
 import Foundation
 import WebKit
 
-class Manager4CacheArticleImages{
-    public static let shared = Manager4CacheArticleImages()
+class Manager4CacheArticleHtmlContent{
+    public static let shared = Manager4CacheArticleHtmlContent()
     let pendingOperations = PendingOperations()
 
     // Use webview to cache all content in html article

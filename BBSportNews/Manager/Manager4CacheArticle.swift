@@ -33,7 +33,7 @@ class Manager4CacheArticle{
     /// cancel all cache request operations
     func cancelAllArticles() {
         pendingOperations.sendRequestCacheQueue.cancelAllOperations()
-        Manager4CacheArticleImages.shared.cancelAllImages()
+        Manager4CacheArticleHtmlContent.shared.cancelAllImages()
     }
     
     /// start call request to cache article if not try too much times
@@ -93,7 +93,7 @@ class SendSimpleCacheRequestOperation: ModifyOperation {
                 // try again if network error
                 Manager4CacheArticle.shared.startCacheArticles(urlStr: self?.urlStr, numberOfFailedRequest: numberOfFailedRequest + 1)
             } else if data != nil {
-                Manager4CacheArticleImages.shared.cacheAllArticleImages(data!, urlString: self?.urlStr)
+                Manager4CacheArticleHtmlContent.shared.cacheAllArticleImages(data!, urlString: self?.urlStr)
             }
             self?.completeOperation()
         })

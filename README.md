@@ -18,7 +18,8 @@ The UI View Controller of a article is in "ArticleDetailVC.swift"
 
 # Manager Files
 Call api, download file from server or check network status in "Manager4Network.swift" <br />
-Cache articles content in "Manager4CacheArticle.swift"
+Cache articles content in "Manager4CacheArticle.swift" <br />
+Cache for Html content of one article in "Manager4CacheArticleHtmlContent.swift"
 
 # Libraries
 Used libaries is in "Libs" folder.
