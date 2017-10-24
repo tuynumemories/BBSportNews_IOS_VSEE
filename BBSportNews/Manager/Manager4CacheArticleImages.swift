@@ -13,6 +13,7 @@ class Manager4CacheArticleImages{
     public static let shared = Manager4CacheArticleImages()
     let pendingOperations = PendingOperations()
 
+    // Use webview to cache all content in html article
     @available(iOS 8.0, *)
     lazy var wkWebView: WKWebView = { [weak self] in
         let webConfiguration = WKWebViewConfiguration()
@@ -20,7 +21,6 @@ class Manager4CacheArticleImages{
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView
         }()
-    
     
     lazy var uiWebView: UIWebView = { [weak self] in
         let webView:UIWebView = UIWebView(frame: .zero)
@@ -74,6 +74,7 @@ class SendSimpleCacheImageRequestOperation: ModifyOperation {
     }
 }
 
+/// use WKWebView to cache for ios >= 8.0
 class SendSimpleCacheImageRequestOperationWKWebview: SendSimpleCacheImageRequestOperation {
     weak var wkWebview: WKWebView?
     
@@ -91,6 +92,7 @@ class SendSimpleCacheImageRequestOperationWKWebview: SendSimpleCacheImageRequest
     }
 }
 
+/// use UIWebView to cache for ios < 8.0
 class SendSimpleCacheImageRequestOperationUIWebview: SendSimpleCacheImageRequestOperation {
     weak var uiWebview: UIWebView?
     
@@ -128,9 +130,11 @@ extension SendSimpleCacheImageRequestOperationUIWebview: UIWebViewDelegate {
         webViewDidStartLoad()
     }
     public func webViewDidFinishLoad(_ webView: UIWebView) {
+        uiWebview?.delegate = nil
         webViewDidFinishLoad()
     }
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
+        uiWebview?.delegate = nil
         webViewDidFailLoad(error)
     }
 }
