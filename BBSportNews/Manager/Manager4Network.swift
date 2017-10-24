@@ -15,6 +15,7 @@ enum BackendError: Error {
 
 class Manager4Network{
     public static let shared = Manager4Network()
+    public static let NW_TIMEOUT: TimeInterval = 10.0
     
     func getArticlesListFromSV(completionHandler: ((BBCSportNews?, Error?, Bool) -> Void)?) {
         getDataFromUrl(
@@ -64,13 +65,18 @@ class Manager4Network{
         // run when finish fetching result
         let finished = {
             (bbCSportNews: Data?, error: Error?, isCached: Bool) in
-            DispatchQueue.main.async {
+            if !Thread.isMainThread {
+                DispatchQueue.main.async {
+                    completionHandler?(bbCSportNews, error, isCached)
+                }
+            } else {
                 completionHandler?(bbCSportNews, error, isCached)
             }
+            
         }
         // Make request
         let session = URLSession.shared
-        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60)
+        let request = URLRequest(url: url, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: Manager4Network.NW_TIMEOUT)
         // Check if response is aldready in cache
         if let cacheResponse = URLCache.shared.cachedResponse(for: request)  {
             finished(cacheResponse.data, nil, true)

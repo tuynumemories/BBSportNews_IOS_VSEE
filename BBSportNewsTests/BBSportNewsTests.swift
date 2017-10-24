@@ -21,9 +21,18 @@ class BBSportNewsTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testArticlesCache() {
+        Manager4Network.shared.clearRequestCache()
+        let expect = expectation(description: "get all articles request")
+        Manager4Network.shared.getArticlesListFromSV { (bbcNews, error, _) in
+            XCTAssertNotNil(bbcNews, "Fail to get articles from sv")
+            expect.fulfill()
+            // get articles from cache
+            Manager4Network.shared.getArticlesListFromSV(completionHandler: { (bbcNews2, error, _) in
+                XCTAssertNotNil(bbcNews, "Fail to get articles from Cache sv")
+            })
+        }
+        waitForExpectations(timeout: Manager4Network.NW_TIMEOUT + 2.0, handler: nil)
     }
     
     func testPerformanceExample() {
