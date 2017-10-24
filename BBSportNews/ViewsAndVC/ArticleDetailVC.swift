@@ -49,9 +49,9 @@ class ArticleDetailVC: UIViewController {
     
     func showHtmlContent(_ htmlString: String, urlString: String)  {
         if #available(iOS 8, *) {
-            wkWebView.loadHTMLString(htmlString, baseURL: URL(string: urlString))
+            wkWebView.loadHTMLString(htmlString, baseURL: nil)
         } else {
-            uiWebView.loadHTMLString(htmlString, baseURL: URL(string: urlString))
+            uiWebView.loadHTMLString(htmlString, baseURL: nil)
         }
     }
     
@@ -107,7 +107,7 @@ extension ArticleDetailVC {
         networkErrorLabel.isHidden = true
         loadingAIV.stopAnimating()
     }
-    public func didFailLoad(_ error: Error) {
+    public func webViewDidFailLoad(_ error: Error) {
         print(error.localizedDescription)
 //        loadingAIV.stopAnimating()
 //        networkErrorLabel.isHidden = false
@@ -123,7 +123,7 @@ extension ArticleDetailVC: UIWebViewDelegate {
         webViewDidFinishLoad()
     }
     public func webView(_ webView: UIWebView, didFailLoadWithError error: Error) {
-        didFailLoad(error)
+        webViewDidFailLoad(error)
     }
 }
 
@@ -136,7 +136,7 @@ extension ArticleDetailVC: WKNavigationDelegate {
         webViewDidFinishLoad()
     }
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        didFailLoad(error)
+        webViewDidFailLoad(error)
     }
 }
 

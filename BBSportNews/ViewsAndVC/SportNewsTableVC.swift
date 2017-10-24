@@ -37,6 +37,13 @@ class SportNewsTableVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // add fake webview to cache the data
+        if #available(iOS 8, *) {
+            view.addSubview(Manager4CacheArticleImages.shared.wkWebView)
+        } else {
+            view.addSubview(Manager4CacheArticleImages.shared.uiWebView)
+        }
+        
         // trick to hide separator of empty cell
         tableView.tableFooterView = UIView()
         // show loading indicator
