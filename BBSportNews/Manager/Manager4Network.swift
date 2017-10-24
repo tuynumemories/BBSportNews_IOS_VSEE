@@ -35,8 +35,8 @@ class Manager4Network{
             if let data = data {
                 let decoder = JSONDecoder()
                 do {
-                    let todo = try decoder.decode(BBCSportNews.self, from: data)
-                    completionHandler?(todo, nil, isCached)
+                    let bbcSportNews = try decoder.decode(BBCSportNews.self, from: data)
+                    completionHandler?(bbcSportNews, nil, isCached)
                 } catch {
                     print("error trying to convert data to JSON : \(error)")
                     completionHandler?(nil, error, isCached)
