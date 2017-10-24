@@ -1,4 +1,4 @@
-<img src="ScreenShot/s1.png">
+<img src="ScreenShot/s1.png" align="center">
 
 # BBSportNews_IOS_VSEE
 
