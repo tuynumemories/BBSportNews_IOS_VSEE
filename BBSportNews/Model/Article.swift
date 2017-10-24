@@ -15,4 +15,13 @@ struct Article: Codable {
     var url: String?
     var urlToImage: String?
     var publishedAt: String?
+    
+    func getNiceFormOfPublishedAt() -> String {
+        guard let publishedAt = publishedAt else {
+            return ""
+        }
+        var newPublishedAt = publishedAt.replacingOccurrences(of: "T", with: " ", options: .literal, range: nil)
+        newPublishedAt = newPublishedAt.replacingOccurrences(of: "Z", with: " ", options: .literal, range: nil)
+        return newPublishedAt
+    }
 }

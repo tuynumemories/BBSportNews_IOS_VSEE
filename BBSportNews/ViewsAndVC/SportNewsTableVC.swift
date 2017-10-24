@@ -165,7 +165,7 @@ class SportNewsTableVC: UITableViewController {
             let article = articles[indexPath.row]
             articleInfoCell.newsTitleLabel.text = article.title
             articleInfoCell.newsDescriptionLabel.text = article.description
-            articleInfoCell.timesampLabel.text = article.publishedAt
+            articleInfoCell.timesampLabel.text = article.getNiceFormOfPublishedAt()
             articleInfoCell.avatarUrlStr = article.urlToImage
             if let urlImage = article.urlToImage {
                 Manager4Network.shared.getImageFromUrl(urlString: urlImage, completionHandler: { (image, _) in
