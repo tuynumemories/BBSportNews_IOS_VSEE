@@ -99,6 +99,8 @@ class ArticleDetailVC: UIViewController {
 extension ArticleDetailVC {
     public func webViewDidStartLoad() {
         print("start to load")
+        networkErrorLabel.isHidden = true
+        loadingAIV.startAnimating()
     }
     public func webViewDidFinishLoad() {
         print("finish to load")
@@ -107,8 +109,8 @@ extension ArticleDetailVC {
     }
     public func didFailLoad(_ error: Error) {
         print(error.localizedDescription)
-        loadingAIV.stopAnimating()
-        networkErrorLabel.isHidden = false
+//        loadingAIV.stopAnimating()
+//        networkErrorLabel.isHidden = false
     }
 }
 
