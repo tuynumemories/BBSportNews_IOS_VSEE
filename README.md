@@ -1,9 +1,9 @@
 
 <p align="center">
-  <img src="ScreenShot/s1.png" width="350"/>
-  <img src="ScreenShot/s2.png" width="350"/>
+  <img src="ScreenShot/s1.png" width="250"/>
+  <img src="ScreenShot/s2.png" width="250"/>
+  <img src="ScreenShot/s3.png" width="350" align="center"/>
 </p>
-<img src="ScreenShot/s3.png" width="550" align="center"/>
 
 # BBSportNews_IOS_VSEE
 
