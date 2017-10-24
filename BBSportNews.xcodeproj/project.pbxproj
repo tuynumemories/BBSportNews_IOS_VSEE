@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F026FDA1F9ECB78006DEABF /* Manager4CacheArticle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F026FD91F9ECB78006DEABF /* Manager4CacheArticle.swift */; };
+		4F026FDD1F9ECBFD006DEABF /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F026FDC1F9ECBFD006DEABF /* Article.swift */; };
+		4F026FDF1F9ECC13006DEABF /* BBCSportNews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F026FDE1F9ECC13006DEABF /* BBCSportNews.swift */; };
+		4F026FE11F9ECF26006DEABF /* PendingOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F026FE01F9ECF26006DEABF /* PendingOperations.swift */; };
 		4F27B1721F9E0AE200301EC7 /* Manager4Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */; };
 		4F27B1751F9E10D400301EC7 /* ArticleInfoTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F27B1741F9E10D400301EC7 /* ArticleInfoTVCell.swift */; };
 		4F2A25081F9E2B4C0049C071 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F2A25071F9E2B4C0049C071 /* WebKit.framework */; };
@@ -38,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F026FD91F9ECB78006DEABF /* Manager4CacheArticle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4CacheArticle.swift; sourceTree = "<group>"; };
+		4F026FDC1F9ECBFD006DEABF /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		4F026FDE1F9ECC13006DEABF /* BBCSportNews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBCSportNews.swift; sourceTree = "<group>"; };
+		4F026FE01F9ECF26006DEABF /* PendingOperations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingOperations.swift; sourceTree = "<group>"; };
 		4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager4Network.swift; sourceTree = "<group>"; };
 		4F27B1741F9E10D400301EC7 /* ArticleInfoTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleInfoTVCell.swift; sourceTree = "<group>"; };
 		4F2A25071F9E2B4C0049C071 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
@@ -83,10 +91,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F026FDB1F9ECBEF006DEABF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4F026FDC1F9ECBFD006DEABF /* Article.swift */,
+				4F026FDE1F9ECC13006DEABF /* BBCSportNews.swift */,
+				4F026FE01F9ECF26006DEABF /* PendingOperations.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		4F27B1701F9E0A8500301EC7 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
 				4F27B1711F9E0AE200301EC7 /* Manager4Network.swift */,
+				4F026FD91F9ECB78006DEABF /* Manager4CacheArticle.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -134,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				4F543F2E1F9E01F00075F384 /* SupportingFiles */,
+				4F026FDB1F9ECBEF006DEABF /* Model */,
 				4F27B1701F9E0A8500301EC7 /* Manager */,
 				4F27B1731F9E107F00301EC7 /* ViewsAndVC */,
 				4F543EFE1F9E013E0075F384 /* AppDelegate.swift */,
@@ -304,8 +324,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F026FDD1F9ECBFD006DEABF /* Article.swift in Sources */,
+				4F026FDF1F9ECC13006DEABF /* BBCSportNews.swift in Sources */,
 				4F543F031F9E013E0075F384 /* ArticleDetailVC.swift in Sources */,
+				4F026FE11F9ECF26006DEABF /* PendingOperations.swift in Sources */,
 				4F27B1721F9E0AE200301EC7 /* Manager4Network.swift in Sources */,
+				4F026FDA1F9ECB78006DEABF /* Manager4CacheArticle.swift in Sources */,
 				4F543F011F9E013E0075F384 /* SportNewsTableVC.swift in Sources */,
 				4F543EFF1F9E013E0075F384 /* AppDelegate.swift in Sources */,
 				4F27B1751F9E10D400301EC7 /* ArticleInfoTVCell.swift in Sources */,

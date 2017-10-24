@@ -33,7 +33,7 @@ class ArticleDetailVC: UIViewController {
             if uiWebView != nil {
                 loadingAIV.startAnimating()
                 Manager4Network.shared.getDataFromUrl(urlString: article.url!, completionHandler: {
-                    [weak self](data, error) in
+                    [weak self](data, error,_) in
                     if let data = data {
                         let htmlString = String(data: data, encoding: String.Encoding.utf8)!
                         self?.showHtmlContent(htmlString)

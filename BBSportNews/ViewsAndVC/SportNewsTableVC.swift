@@ -56,6 +56,7 @@ class SportNewsTableVC: UITableViewController {
     @objc private func refreshArticlesData(_ sender: Any) {
         // Fetch Weather Data
         Manager4Network.shared.clearRequestCache()
+        Manager4CacheArticle.shared.cancelAllArticles()
         fetchArticlesData()
     }
     
@@ -72,11 +73,12 @@ class SportNewsTableVC: UITableViewController {
     /// fetch list articles from server
     private func fetchArticlesData() {
         Manager4Network.shared.getArticlesListFromSV(completionHandler: {
-            [weak self] bbcSportNews, error in
+            [weak self] bbcSportNews, error, _ in
             self?.loadingAIV.stopAnimating()
             if let bbcSportNews = bbcSportNews {
                 // if get any bbc sport news from server
                 self?.articles = bbcSportNews.articles
+                Manager4CacheArticle.shared.cacheAllArticles(articles: self?.articles)
                 self?.tableView.reloadData()
                 self?.enableNetworkError(false)
             } else {
