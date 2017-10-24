@@ -6,6 +6,7 @@ The mobile app has standard master-detail layout. On master screen, it displays 
 
 # UI View Controller
 The UI View Controller of list of article is in "SportNewsTableVC.swift"
+
 The UI View Controller of a article is in "ArticleDetailVC.swift"
 
 # Unit Test
