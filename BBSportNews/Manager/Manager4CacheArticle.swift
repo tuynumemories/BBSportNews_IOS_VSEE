@@ -14,6 +14,26 @@ class Manager4CacheArticle{
     let maxFailedRequest = 3
     var dicOfCachingArticleOperation = [String: SendSimpleCacheRequestOperation]()
     
+    /// get local cache request path
+    var prefixLocalRequestCachePath: String? {
+        return "/HttpRequestCache"
+    }
+    
+    
+//    var localRequestCachePath: String? {
+//        let bundleID = Bundle.main.bundleIdentifier!
+//        let localPath = Manager4LocalStorage.shared.getCachesDirectory()! + "/" + bundleID + prefixLocalRequestCachePath! + "/fsCachedData"
+//        do {
+//            com.donick.BBSportNews/HttpRequestCache/fsCachedData/65A41519-5754-4795-B3A6-75EB42A6FED0
+            // fsCachedData
+//            if FileManager.default.fileExists(atPath: localPath) {
+//                let directoryContents = try FileManager.default.contentsOfDirectory(at: URL(string: localPath)!, includingPropertiesForKeys: nil, options: [])
+//                print("")
+//            }
+//        } catch { print(error)}
+//        return nil
+//    }
+    
     /// cache all articles
     func cacheAllArticles(articles: [Article]?) {
         guard let articles = articles else {
@@ -28,6 +48,7 @@ class Manager4CacheArticle{
     /// cancel all cache request operations
     func cancelAllArticles() {
         pendingOperations.sendRequestCacheQueue.cancelAllOperations()
+//        Manager4CacheArticleImages.shared.cancelAllImages()
     }
     
     /// start call request to cache article if not try too much times
@@ -86,6 +107,8 @@ class SendSimpleCacheRequestOperation: ModifyOperation {
                 data == nil{
                 // try again if network error
                 Manager4CacheArticle.shared.startCacheArticles(urlStr: self?.urlStr, numberOfFailedRequest: numberOfFailedRequest + 1)
+            } else if data != nil {
+//                Manager4CacheArticleImages.shared.cacheAllArticleImages(data!, urlString: self?.urlStr)
             }
             self?.completeOperation()
         })

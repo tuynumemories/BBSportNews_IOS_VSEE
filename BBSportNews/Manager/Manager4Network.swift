@@ -16,6 +16,16 @@ enum BackendError: Error {
 class Manager4Network{
     public static let shared = Manager4Network()
     public static let NW_TIMEOUT: TimeInterval = 10.0
+    public static let NW_HOST = "newsapi.org"
+    
+    private init() {
+        startListeningNetwork()
+    }
+    
+    /// clear main request cache
+    func clearRequestCache() {
+        URLCache.shared.removeAllCachedResponses() // clear cache
+    }
     
     func getArticlesListFromSV(completionHandler: ((BBCSportNews?, Error?, Bool) -> Void)?) {
         getDataFromUrl(
@@ -49,10 +59,11 @@ class Manager4Network{
        
     }
     
-    func clearRequestCache() {
-        URLCache.shared.removeAllCachedResponses() // clear cache
-    }
-    
+    /// get Data from server with string url
+    ///
+    /// - Parameters:
+    ///   - urlString: url by string
+    ///   - completionHandler: callback when finish
     func getDataFromUrl(urlString: String, completionHandler: ((Data?, Error?, Bool) -> Void)?) {
         
         // set up URLRequest with URL
@@ -62,6 +73,17 @@ class Manager4Network{
             completionHandler?(nil, error, false)
             return
         }
+        getDataFromUrl(url: url, completionHandler: completionHandler)
+    }
+    
+    
+    /// get Data from server with url
+    ///
+    /// - Parameters:
+    ///   - url: request url
+    ///   - completionHandler: callback when finish
+    func getDataFromUrl(url: URL, completionHandler: ((Data?, Error?, Bool) -> Void)?) {
+        
         // run when finish fetching result
         let finished = {
             (bbCSportNews: Data?, error: Error?, isCached: Bool) in
@@ -102,5 +124,50 @@ class Manager4Network{
             finished(responseData, nil, false)
         })
         task.resume()
+    }
+}
+
+// MARK: - check for available network
+extension Manager4Network {
+    
+    /// regist notification to check network status
+    private func startListeningNetwork() {
+        NotificationCenter.default.addObserver(self, selector: #selector(statusManager), name: .flagsChanged, object: Network.reachability)
+        testNetwork()
+    }
+
+    /// check can app connect to internet
+    ///
+    /// - Returns: is network available
+    func isNetworkOK() -> Bool {
+        guard let reachability =  Network.reachability else { print("network fail"); testNetwork(); return false }
+        if !reachability.isReachable { testNetwork() }
+        return reachability.isReachable
+    }
+
+    /// send test request to check network.
+    func testNetwork() {
+        do { Network.reachability = try NetReachability(hostname: Manager4Network.NW_HOST)
+            do { try Network.reachability?.start()
+            } catch let error as Network.Error { print(error)
+            } catch { print(error) }
+        } catch { print(error) }
+    }
+
+    /// get notification when network turn off or network turn on
+    ///
+    /// - Parameter notification: notification object
+    @objc func statusManager(_ notification: NSNotification) {
+        guard let status = Network.reachability?.status else { return }
+        print("Reachability Summary")
+        print("Status:", status)
+        print("HostName:", Network.reachability?.hostname ?? "nil")
+        print("Reachable:", Network.reachability?.isReachable ?? "nil")
+        print("Wifi:", Network.reachability?.isReachableViaWiFi ?? "nil")
+        if (Network.reachability?.isReachable)! {
+            Broadcaster.notify(NetCtrlerNoti.self) {
+                $0.networkActivated()
+            }
+        }
     }
 }

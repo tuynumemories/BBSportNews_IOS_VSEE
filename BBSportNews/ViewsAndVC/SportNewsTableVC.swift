@@ -13,6 +13,8 @@ class SportNewsTableVC: UITableViewController {
     var articleDetailVC: ArticleDetailVC? = nil
     
     var articles:[Article]?
+    
+    /// show loading circle when download articles from server
     lazy var loadingAIV: UIActivityIndicatorView = { [weak self] in
         let activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityView.translatesAutoresizingMaskIntoConstraints = false
@@ -20,6 +22,7 @@ class SportNewsTableVC: UITableViewController {
         self?.view.addSubview(activityView)
         return activityView
     }()
+    /// show network error message if can't connect to server
     lazy var networkErrorLabel: UILabel = { [weak self] in
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -53,13 +56,27 @@ class SportNewsTableVC: UITableViewController {
         refreshControl?.addTarget(self, action: #selector(refreshArticlesData(_:)), for: .valueChanged)
     }
     
+    /// pull to request event
+    ///
+    /// - Parameter sender: refresh control object
     @objc private func refreshArticlesData(_ sender: Any) {
         // Fetch Weather Data
-        Manager4Network.shared.clearRequestCache()
-        Manager4CacheArticle.shared.cancelAllArticles()
-        fetchArticlesData()
+        if Manager4Network.shared.isNetworkOK() {
+            // just clear cache when network is ok
+            Manager4Network.shared.clearRequestCache()
+            Manager4CacheArticle.shared.cancelAllArticles()
+            fetchArticlesData()
+        } else {
+            // if no network signal
+            enableNetworkError(true)
+            refreshControl?.endRefreshing()
+        }
+        
     }
     
+    /// show network error message
+    ///
+    /// - Parameter enable: should show
     func enableNetworkError(_ enable: Bool) {
         if enable && articles == nil {
             // show network error label
@@ -91,6 +108,14 @@ class SportNewsTableVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
+        // start listenning notification for network state
+        Broadcaster.register(NetCtrlerNoti.self, observer: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // stop listenning notification for network state
+        Broadcaster.unregister(NetCtrlerNoti.self, observer: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -102,6 +127,7 @@ class SportNewsTableVC: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
+            /// prepare to show the selected acticle
             if let indexPath = tableView.indexPathForSelectedRow,
                 let articles = articles{
                 // pass article to detail view
@@ -167,6 +193,17 @@ extension SportNewsTableVC {
             view.addConstraint(NSLayoutConstraint(item: networkErrorLabel, attribute: attribute,
                                              relatedBy: .equal, toItem: view, attribute: attribute,
                                              multiplier: 1, constant: 0))
+        }
+    }
+}
+
+
+// MARK: - Handle network status
+extension SportNewsTableVC: NetCtrlerNoti {
+    func networkActivated(){
+        if articles == nil,
+            let refreshControl = self.refreshControl{
+            refreshArticlesData(refreshControl)
         }
     }
 }

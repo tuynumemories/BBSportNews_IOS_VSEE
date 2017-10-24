@@ -29,14 +29,13 @@ class ArticleDetailVC: UIViewController {
     func configureView() {
         if let article = article {
             self.title = article.title
-//            webviewInstance.loadRequest(NSURLRequest(URL: NSURL(string: "google.ca")!))
             if uiWebView != nil {
                 loadingAIV.startAnimating()
                 Manager4Network.shared.getDataFromUrl(urlString: article.url!, completionHandler: {
                     [weak self](data, error,_) in
                     if let data = data {
                         let htmlString = String(data: data, encoding: String.Encoding.utf8)!
-                        self?.showHtmlContent(htmlString)
+                        self?.showHtmlContent(htmlString, urlString: article.url!)
                         self?.networkErrorLabel.isHidden = true
                     } else {
                         // network fail
@@ -44,16 +43,15 @@ class ArticleDetailVC: UIViewController {
                         self?.networkErrorLabel.isHidden = false
                     }
                 })
-//                wkWebView.load(URLRequest(url: URL(string: article.url!)!))
             }
         }
     }
     
-    func showHtmlContent(_ htmlString: String)  {
+    func showHtmlContent(_ htmlString: String, urlString: String)  {
         if #available(iOS 8, *) {
-            wkWebView.loadHTMLString(htmlString, baseURL: nil)
+            wkWebView.loadHTMLString(htmlString, baseURL: URL(string: urlString))
         } else {
-            uiWebView.loadHTMLString(htmlString, baseURL: nil)
+            uiWebView.loadHTMLString(htmlString, baseURL: URL(string: urlString))
         }
     }
     
@@ -71,6 +69,18 @@ class ArticleDetailVC: UIViewController {
         setupConstraints()
         setUpWebview()
         configureView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        // start listenning notification for network state
+        Broadcaster.register(NetCtrlerNoti.self, observer: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // stop listenning notification for network state
+        Broadcaster.unregister(NetCtrlerNoti.self, observer: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -92,6 +102,7 @@ extension ArticleDetailVC {
     }
     public func webViewDidFinishLoad() {
         print("finish to load")
+        networkErrorLabel.isHidden = true
         loadingAIV.stopAnimating()
     }
     public func didFailLoad(_ error: Error) {
@@ -137,6 +148,16 @@ extension ArticleDetailVC {
                                                   relatedBy: .equal, toItem: view, attribute: attribute,
                                                   multiplier: 1, constant: 0))
             }
+        }
+    }
+}
+
+// MARK: - Handle network status
+extension ArticleDetailVC: NetCtrlerNoti {
+    func networkActivated(){
+        if networkErrorLabel.isHidden == false {
+            // reload page
+            configureView()
         }
     }
 }

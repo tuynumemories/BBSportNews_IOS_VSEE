@@ -21,8 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
         
+        // Set up network
+        _ = Manager4Network.shared
         
-        let urlCache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: nil)
+        // Set up Cache for http request
+        let urlCache = URLCache(memoryCapacity: 4 * 1024 * 1024, diskCapacity: 100 * 1024 * 1024, diskPath: Manager4CacheArticle.shared.prefixLocalRequestCachePath)
         URLCache.shared = urlCache
         UIApplication.shared.statusBarStyle = .lightContent
         

@@ -12,15 +12,15 @@ class PendingOperations {
     //    lazy var sendRequestInProgress = [IndexPath:Operation]()
     lazy var sendRequestCacheQueue:OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "sendRequestQueue"
+        queue.name = "sendRequestCacheQueue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
     
     //    lazy var sendRequestInProgress = [IndexPath:Operation]()
-    lazy var otherQueue:OperationQueue = {
+    lazy var sendImageRequestCacheQueue:OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "otherQueue"
+        queue.name = "sendImageRequestCacheQueue"
         queue.maxConcurrentOperationCount = 1
         return queue
     }()
