@@ -17,7 +17,7 @@ The UI View Controller of a article is in "ArticleDetailVC.swift"
 
 
 # Manager Files
-Call api, download file from server or check network status in "Manager4Network.swift"
+Call api, download file from server or check network status in "Manager4Network.swift" <br />
 Cache articles content in "Manager4CacheArticle.swift"
 
 # Libraries
